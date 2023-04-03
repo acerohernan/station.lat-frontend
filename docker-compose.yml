@@ -1,0 +1,11 @@
+version: "3"
+services:
+  test-db:
+    image: postgres:15
+    restart: always
+    container_name: test_db_postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=latinstation_test

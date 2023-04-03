@@ -1,0 +1,63 @@
+{
+  "name": "@latinstation/ui",
+  "version": "1.0.0",
+  "description": "Set of ui components for latin station's projects",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rm -rf ./dist && rollup -c && tsc -d --emitDeclarationOnly --declarationDir dist && npx tailwindcss -i ./src/styles/globals.css -o ./dist/styles.css",
+    "format": "prettier --write src/**/*.{js,ts,jsx,tsx}",
+    "lint": "eslint src/**/*.{js,ts,jsx,tsx}",
+    "tailwind": "npx tailwindcss -i ./src/styles/tailwind-input.css -o ./dist/output.css --watch",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "cross-env NODE_OPTIONS=--openssl-legacy-provider build-storybook"
+  },
+  "keywords": [],
+  "author": "acerohernan",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@heroicons/react": "^2.0.16",
+    "@latinstation/config": "*",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@rollup/plugin-url": "^8.0.1",
+    "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-docs": "^6.5.16",
+    "@storybook/addon-essentials": "^6.5.16",
+    "@storybook/addon-interactions": "^6.5.16",
+    "@storybook/addon-links": "^6.5.16",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/addon-styling": "^0.3.2",
+    "@storybook/builder-webpack5": "^6.5.16",
+    "@storybook/manager-webpack5": "^6.5.16",
+    "@storybook/react": "^6.5.16",
+    "@storybook/testing-library": "^0.0.13",
+    "@storybook/theming": "^6.5.16",
+    "@types/react": "^18.0.30",
+    "@types/react-dom": "^18.0.11",
+    "autoprefixer": "^10.4.14",
+    "babel-loader": "^8.3.0",
+    "next": "13.2.4",
+    "postcss": "^8.4.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup": "^3.20.2",
+    "storybook-dark-mode": "^2.1.1",
+    "tailwindcss": "^3.2.7",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.4.0",
+    "tailwind-merge": "^1.11.0"
+  },
+  "peerDependencies": {
+    "@heroicons/react": "^2.0.16",
+    "react": "^18.2.0",
+    "next": "13.2.4"
+  }
+}

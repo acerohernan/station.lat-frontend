@@ -1,0 +1,15 @@
+# app
+node_modules/
+
+# build
+.next/
+dist/
+
+# turbo
+.turbo/
+
+# storybook
+storybook-static/
+
+# env
+.env

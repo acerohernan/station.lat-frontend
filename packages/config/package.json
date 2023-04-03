@@ -1,0 +1,9 @@
+{
+  "name": "@latinstation/config",
+  "version": "1.0.0",
+  "description": "Package of all the shared configuration in the frontend projects",
+  "scripts": {},
+  "keywords": [],
+  "author": "acerohernan",
+  "license": "MIT"
+}

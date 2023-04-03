@@ -1,0 +1,13 @@
+/* The base is not imported beause the default styles are applying by the @latinstation/ui package */
+@tailwind components;
+@tailwind utilities;
+
+@layer {
+  .light {
+    @apply bg-gray_light;
+  }
+
+  .dark {
+    @apply bg-black_secondary;
+  }
+}

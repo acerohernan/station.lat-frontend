@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #8ca3ba93;
+  border-radius: 10px;
+}
+
+/* Switch css to make it functionaly without js */
+.toggle-bg:after {
+  content: "";
+  @apply absolute top-0.5 left-0.5 bg-white border border-gray-300 rounded-full h-5 w-5 transition shadow-sm;
+}
+
+input:focus + .toggle-bg {
+  @apply ring-4 ring-blue_primary/40;
+}
+
+input:checked + .toggle-bg:after {
+  transform: translateX(100%);
+  @apply border-white;
+}
+
+input:checked + .toggle-bg {
+  @apply bg-blue_primary border-blue_primary;
+}
