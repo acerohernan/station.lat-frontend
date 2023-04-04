@@ -1,40 +1,20 @@
 import { Button, Card, Heading, IconButton, Input, Link, Switch, Text } from "@latinstation/ui";
 import React, { useState } from "react";
-import { signIn, useSession } from "next-auth/react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
-import GoogleIcon from "./shared/icons/GoogleIcon";
-import FacebookIcon from "./shared/icons/FacebookIcon";
 import AuthLayout from "./shared/components/AuthLayout";
 import Divisor from "./shared/components/Divisor";
+import GoogleAuthButton from "./shared/components/oauth/GoogleSignInButton";
 
 function SignInView() {
   const [watchPassword, setWatchPassword] = useState(false);
   const handleWatchPassword = () => setWatchPassword(!watchPassword);
 
-  const { data } = useSession();
-
-  console.log(data);
-
   return (
     <AuthLayout>
       <Card className="w-full max-w-2xl flex flex-col items-center">
         <Heading as="h3">Sign In</Heading>
-        <div className="grid mt-8 w-full gap-4 sm:grid-cols-2">
-          <button
-            type="button"
-            className="flex items-center justify-center rounded-md gap-3 py-3 w-full border-blue_light dark:border-white/20 border-2"
-            onClick={() => signIn("google")}
-          >
-            <GoogleIcon />
-            <span className="text-sm text-black_primary  dark:text-white font-semibold">Sign in with Google</span>
-          </button>
-          <button
-            type="button"
-            className="flex items-center justify-center rounded-md gap-3 py-3 w-full border-blue_light dark:border-white/20 border-2"
-          >
-            <FacebookIcon />
-            <span className="text-sm text-black_primary  dark:text-white font-semibold">Sign in with Facebook</span>
-          </button>
+        <div className="mt-8 w-full">
+          <GoogleAuthButton label="Sign in with Google" />
         </div>
         <Divisor />
         <div className="flex w-full flex-col gap-4">

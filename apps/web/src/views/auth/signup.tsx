@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Button, Card, Heading, IconButton, Input, Link, Switch, Text } from "@latinstation/ui";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import AuthLayout from "./shared/components/AuthLayout";
-import GoogleIcon from "./shared/icons/GoogleIcon";
-import FacebookIcon from "./shared/icons/FacebookIcon";
 import Divisor from "./shared/components/Divisor";
+import GoogleAuthButton from "./shared/components/oauth/GoogleSignInButton";
 
 function SignUpView() {
   const [watchPassword, setWatchPassword] = useState(false);
@@ -14,21 +13,8 @@ function SignUpView() {
     <AuthLayout>
       <Card className="w-full max-w-2xl flex flex-col items-center">
         <Heading as="h3">Get started with Latin Station</Heading>
-        <div className="grid mt-8 w-full gap-4 sm:grid-cols-2">
-          <button
-            type="button"
-            className="flex items-center justify-center rounded-md gap-3 py-3 w-full border-blue_light dark:border-white/20 border-2"
-          >
-            <GoogleIcon />
-            <span className="text-sm text-black_primary  dark:text-white font-semibold">Sign up with Google</span>
-          </button>
-          <button
-            type="button"
-            className="flex items-center justify-center rounded-md gap-3 py-3 w-full border-blue_light dark:border-white/20 border-2"
-          >
-            <FacebookIcon />
-            <span className="text-sm text-black_primary  dark:text-white font-semibold">Sign up with Facebook</span>
-          </button>
+        <div className="mt-8 w-full">
+          <GoogleAuthButton label="Sign up with Google" />
         </div>
         <Divisor />
         <div className="flex w-full flex-col gap-4">

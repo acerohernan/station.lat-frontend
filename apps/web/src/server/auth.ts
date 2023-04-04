@@ -34,13 +34,13 @@ export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID as string,
-      clientSecret: env.GOOGLE_CLIENT_ID as string,
+      clientSecret: env.GOOGLE_CLIENT_SECRET as string,
     }),
   ],
 };
 
 /* Wrapper for 'getServerSideSession' */
 export const getServerAuthSession = (ctx: {
-    req: GetServerSidePropsContext["req"],
-    res: GetServerSidePropsContext["res"]
+  req: GetServerSidePropsContext["req"];
+  res: GetServerSidePropsContext["res"];
 }) => getServerSession(ctx.req, ctx.res, authOptions);
