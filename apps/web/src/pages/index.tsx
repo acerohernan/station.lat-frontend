@@ -1,6 +1,8 @@
 import Head from "next/head";
+import { GetServerSideProps } from "next";
 import HomeView from "@/views/home";
 import { Layout } from "@/components/Layout";
+import { getServerAuthSession } from "@/server/auth";
 
 export default function Home() {
   return (
@@ -15,3 +17,12 @@ export default function Home() {
     </Layout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const session = await getServerAuthSession(ctx);
+  console.log(session);
+
+  return {
+    props: {},
+  };
+};

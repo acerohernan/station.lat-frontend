@@ -5,12 +5,12 @@ import { cva, VariantProps } from "class-variance-authority";
 const textClasses = cva("inline-block", {
   variants: {
     variant: {
-      default: "text-gray_dark dark:text-gray_secondary",
+      primary: "text-black_primary dark:text-white",
+      secondary: "text-gray_dark dark:text-gray_secondary",
       danger: "text-red_danger",
       warning: "text-yellow_warning",
       info: "text-blue_primary",
       success: "text-green_success",
-      bold: "text-gray_dark font-semibold dark:text-gray_secondary",
     },
     size: {
       sm: "text-sm",
@@ -18,15 +18,17 @@ const textClasses = cva("inline-block", {
     },
   },
   defaultVariants: {
-    variant: "default",
+    variant: "secondary",
     size: "sm",
   },
 });
 
-interface TextProps extends ComponentProps<"span">, PropsWithChildren, VariantProps<typeof textClasses> {}
+interface TextProps extends ComponentProps<"span">, PropsWithChildren, VariantProps<typeof textClasses> {
+  bold?: boolean;
+}
 
-const Text: React.FC<TextProps> = ({ children, className, variant = "default", size = "sm", ...props }) => (
-  <span className={twMerge(className, textClasses({ variant, size }))} {...props}>
+const Text: React.FC<TextProps> = ({ children, className, variant, size, bold, ...props }) => (
+  <span className={twMerge(className, textClasses({ variant, size }), bold ? "font-semibold" : "")} {...props}>
     {children}
   </span>
 );

@@ -33,7 +33,7 @@ const Overlay: React.FC<OverlayProps> = ({ onClick }) => (
 const Group: React.FC<SideBarGroupProps> = ({ title, children }) => (
   <div>
     {Boolean(title) && (
-      <Text className="ml-3" variant="bold" size="xs">
+      <Text className="ml-3" bold size="xs">
         {title?.toUpperCase()}
       </Text>
     )}
@@ -54,7 +54,7 @@ const Item: React.FC<SideBarItemProps> = ({ selected, href, icon, label }) => {
       href={href}
     >
       {iconElement}
-      <Text variant={selected ? "info" : "default"}>{label}</Text>
+      <Text variant={selected ? "info" : "secondary"}>{label}</Text>
     </NextLink>
   );
 };
