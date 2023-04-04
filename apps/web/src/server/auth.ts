@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 import { GetServerSidePropsContext } from "next";
 import { DefaultSession, NextAuthOptions, getServerSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { env } from "process";
 
 /* Allow us to add custom object and keep tyoe safety. */
@@ -35,6 +36,22 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID as string,
       clientSecret: env.GOOGLE_CLIENT_SECRET as string,
+    }),
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text", placeholder: "test@test.com" },
+        password: { label: "Password", type: "password", placeholder: "*******" },
+      },
+      async authorize(credentials, req) {
+        const user = { email: "test@test.com", id: "1", name: "Test Name" };
+
+        if (user) {
+          return user;
+        }
+
+        return null;
+      },
     }),
   ],
 };
