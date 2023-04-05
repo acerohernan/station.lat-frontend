@@ -9,3 +9,8 @@ services:
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=latinstation_test
+    volumes:
+      - test-db-data:/var/lib/postgresql
+
+volumes:
+  test-db-data:
