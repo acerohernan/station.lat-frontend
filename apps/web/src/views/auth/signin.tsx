@@ -6,6 +6,7 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import AuthLayout from "./shared/components/AuthLayout";
 import Divisor from "./shared/components/Divisor";
 import GoogleAuthButton from "./shared/components/oauth/GoogleSignInButton";
+import DiscordAuthButton from "./shared/components/oauth/DiscordSignIn";
 
 interface SignInFormValues {
   email: string;
@@ -42,8 +43,9 @@ function SignInView() {
       <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-2xl">
         <Card className="w-full flex flex-col items-center">
           <Heading as="h3">Sign In</Heading>
-          <div className="mt-8 w-full">
+          <div className="mt-8 w-full grid gap-4 sm:grid-cols-2">
             <GoogleAuthButton label="Sign in with Google" />
+            <DiscordAuthButton label="Sign in with Discord" />
           </div>
           <Divisor />
           <div className="flex w-full flex-col gap-4">

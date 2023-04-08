@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
+import { signOut } from "next-auth/react";
 import { UserIcon } from "@heroicons/react/24/solid";
-import { Card, IconButton, Text } from "@latinstation/ui";
+import { IconButton, Text } from "@latinstation/ui";
 import useClickOutside from "@/hooks/useClickOutside";
 
 const UserMenuButton = () => {
@@ -41,6 +42,13 @@ const UserMenuButton = () => {
             </button>
             <button type="button" className="w-full hover:bg-gray_light text-left pl-4 py-1">
               <Text variant="primary">Profile & Account</Text>
+            </button>
+            <button
+              type="button"
+              className="w-full hover:bg-gray_light text-left pl-4 py-1"
+              onClick={() => signOut({ callbackUrl: "http://localhost:3000/signin" })}
+            >
+              <Text variant="primary">SignOut</Text>
             </button>
           </div>
         </div>

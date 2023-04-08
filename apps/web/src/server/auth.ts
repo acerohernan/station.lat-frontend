@@ -4,6 +4,7 @@ import { GetServerSidePropsContext } from "next";
 import { DefaultSession, NextAuthOptions, getServerSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
+import DiscordProvider from "next-auth/providers/discord";
 import { env } from "process";
 
 /* Allow us to add custom object and keep tyoe safety. */
@@ -36,6 +37,10 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID as string,
       clientSecret: env.GOOGLE_CLIENT_SECRET as string,
+    }),
+    DiscordProvider({
+      clientId: env.DISCORD_CLIENT_ID as string,
+      clientSecret: env.DISCORD_CLIENT_SECRET as string,
     }),
     CredentialsProvider({
       name: "Credentials",
