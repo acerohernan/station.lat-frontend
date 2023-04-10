@@ -13,8 +13,10 @@ const GoogleAuthButton: React.FC<Props> = ({ label }) => (
     className="flex items-center justify-center rounded-md gap-3 py-3 w-full border-blue_light dark:border-white/20 border-2"
     onClick={() =>
       signIn("google", {
-        redirect: true,
+        redirect: false,
         callbackUrl: "/",
+      }).then((res) => {
+        console.log(res);
       })
     }
   >
