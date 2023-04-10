@@ -28,13 +28,12 @@ function SignInView() {
       ...data,
       redirect: false,
     }).then((response) => {
-      console.log(response);
-
-      if (response?.ok) {
-        alert("Registered successfully");
+      if (response?.error) {
+        alert(response.error);
       }
-
-      console.log(response?.error);
+      if (response?.ok) {
+        alert("Success! Welcome back!");
+      }
     });
   };
 
