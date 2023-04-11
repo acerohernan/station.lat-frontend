@@ -5,6 +5,7 @@ import type { ComponentMeta } from "@storybook/react";
 import type { VariantProps } from "class-variance-authority";
 
 import Button from "./Button";
+import { Text } from "../Text";
 import { buttonClasses } from "./classes";
 import IconButton from "./IconButton";
 
@@ -45,5 +46,18 @@ export const Icons = () => (
     <IconButton icon={<BellIcon className="h-5 w-5 text-gray_secondary" />} />
     <IconButton icon={<Bars3Icon className="h-5 w-5 text-gray_secondary" />} />
     <IconButton icon={<SunIcon className="h-6 w-6 text-yellow_warning" />} />
+  </div>
+);
+
+export const States = () => (
+  <div>
+    <Text className="w-full mb-2">Loading</Text>
+    <div className="flex gap-4">
+      {variants.map((variant) => (
+        <Button key={variant} variant={variant} loading>
+          Something
+        </Button>
+      ))}
+    </div>
   </div>
 );

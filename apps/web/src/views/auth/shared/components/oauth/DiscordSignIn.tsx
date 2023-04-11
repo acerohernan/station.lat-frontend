@@ -10,7 +10,7 @@ interface Props {
 const DiscordAuthButton: React.FC<Props> = ({ label }) => (
   <button
     type="button"
-    className="flex items-center justify-center rounded-md gap-3 py-3 w-full border-blue_light dark:border-white/20 border-2"
+    className="flex items-center justify-center rounded-md gap-3 py-3 w-full border-blue_light dark:border-white/20 border-2 hover:dark:border-white/40"
     onClick={() => signIn("discord")}
   >
     <DiscordIcon />

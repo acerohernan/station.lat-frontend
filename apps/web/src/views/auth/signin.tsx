@@ -1,45 +1,49 @@
-import { Button, Card, Heading, IconButton, Input, Link, Switch, Text } from "@latinstation/ui";
-import { useForm } from "react-hook-form";
+import { Button, Card, Heading, Input, Link, Text } from "@latinstation/ui";
 import { signIn } from "next-auth/react";
 import React, { useState } from "react";
-import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
+import { useForm } from "react-hook-form";
 import AuthLayout from "./shared/components/AuthLayout";
 import Divisor from "./shared/components/Divisor";
 import GoogleAuthButton from "./shared/components/oauth/GoogleSignInButton";
 import DiscordAuthButton from "./shared/components/oauth/DiscordSignIn";
 
-interface SignInFormValues {
+interface EmailSignInForm {
   email: string;
-  password: string;
 }
 
 function SignInView() {
-  const [watchPassword, setWatchPassword] = useState(false);
-  const handleWatchPassword = () => setWatchPassword(!watchPassword);
-
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
-  } = useForm<SignInFormValues>();
+  } = useForm<EmailSignInForm>();
 
-  const onSubmit = (data: SignInFormValues) => {
-    signIn("credentials", {
+  const [loading, setLoading] = useState(false);
+  const [emailSended, setEmailSended] = useState(false);
+
+  const handleEmailSignIn = (data: EmailSignInForm) => {
+    setLoading(true);
+    signIn("email", {
       ...data,
       redirect: false,
-    }).then((response) => {
-      if (response?.error) {
-        alert(response.error);
+      callbackUrl: "/",
+    }).then((res) => {
+      if (res?.ok) {
+        setEmailSended(true);
+        setValue("email", "");
       }
-      if (response?.ok) {
-        alert("Success! Welcome back!");
+
+      if (res?.error) {
+        alert(res.error);
       }
+      setLoading(false);
     });
   };
 
   return (
     <AuthLayout>
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-2xl">
+      <form className="w-full max-w-2xl" onSubmit={handleSubmit(handleEmailSignIn)}>
         <Card className="w-full flex flex-col items-center">
           <Heading as="h3">Sign In</Heading>
           <div className="mt-8 w-full grid gap-4 sm:grid-cols-2">
@@ -47,52 +51,30 @@ function SignInView() {
             <DiscordAuthButton label="Sign in with Discord" />
           </div>
           <Divisor />
-          <div className="flex w-full flex-col gap-4">
+          {emailSended && (
+            <div className="w-full p-4 bg-green_success/5 border-green_success border mb-4 rounded-md">
+              <span className="text-green_success text-sm">Success! We have sended you a magic link to your email</span>
+            </div>
+          )}
+          <div className="w-full">
             <Input
               id="email-id"
               label="Email"
               {...register("email", {
-                required: true,
+                required: "The field is required",
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: "Entered value does not match email format",
+                },
               })}
-            />
-            <Input
-              id="password-id"
-              label="Password"
-              type={watchPassword ? "text" : "password"}
-              rightElement={
-                watchPassword ? (
-                  <IconButton
-                    icon={
-                      <EyeSlashIcon
-                        className="h-6 w-6 text-gray_secondary dark:text-white"
-                        onClick={handleWatchPassword}
-                      />
-                    }
-                  />
-                ) : (
-                  <IconButton
-                    icon={
-                      <EyeIcon className="h-6 w-6 text-gray_secondary dark:text-white" onClick={handleWatchPassword} />
-                    }
-                  />
-                )
-              }
-              {...register("password", {
-                required: true,
-              })}
+              bottomMessage={errors.email?.message}
+              variant={errors.email?.message ? "error" : "default"}
             />
           </div>
-          <div className="mt-5 grid grid-cols-2 justify-between items-center w-full gap-2">
-            <div className="flex gap-2 items-center">
-              <Switch id="swith-id" />
-              <Text>Remember me</Text>
-            </div>
-            <Link href="/forgot-password" className="text-end">
-              Forgot password?
-            </Link>
-          </div>
-          <div className="w-full flex flex-col mt-8">
-            <Button type="submit">Sign in</Button>
+          <div className="w-full flex flex-col mt-6">
+            <Button type="submit" loading={loading}>
+              Sign in with email
+            </Button>
             <div className="w-full flex items-center justify-center gap-1 mt-4">
               <Text>Don&apos;t have an account?</Text>
               <Link href="/signup">Create an account</Link>
