@@ -6,3 +6,4 @@ export * from "./components/Link";
 export * from "./components/SideBar";
 export * from "./components/Switch";
 export * from "./components/Text";
+export * from "./components/Message";

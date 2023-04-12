@@ -56,6 +56,9 @@ export const authOptions: NextAuthOptions = {
     error: "/signin",
     signIn: "/signin",
   },
+  session: {
+    maxAge: 604800,
+  },
 };
 
 /* Wrapper for 'getServerSideSession' */
