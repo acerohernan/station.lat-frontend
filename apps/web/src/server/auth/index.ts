@@ -52,6 +52,10 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  pages: {
+    error: "/signin",
+    signIn: "/signin",
+  },
 };
 
 /* Wrapper for 'getServerSideSession' */
