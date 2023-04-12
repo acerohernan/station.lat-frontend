@@ -38,13 +38,15 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
+  id                  String    @id @default(cuid())
+  name                String?
+  email               String?   @unique
+  emailVerified       DateTime?
+  image               String?
+  welcomeFlowFinished Boolean   @default(false)
+  accounts            Account[]
+  sessions            Session[]
+  company             Company?
 }
 
 model VerificationToken {
@@ -53,4 +55,25 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+// Tables for the system
+
+model Company {
+  id                    String  @id @default(uuid())
+  userId                String  @unique
+  name                  String
+  isPro                 Boolean @default(false)
+  lastMothPaymentFailed Boolean @default(false)
+  timeZoneId            String
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  timeZone TimeZone @relation(fields: [timeZoneId], references: [id], onDelete: NoAction)
+}
+
+model TimeZone {
+  id             String    @id @default(uuid())
+  name           String
+  utc_difference Int       @default(0)
+  company        Company[]
 }

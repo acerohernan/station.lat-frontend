@@ -30,6 +30,17 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     };
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  //  @ts-ignore
+  if (!session.user.welcomeFlowFinished) {
+    return {
+      redirect: {
+        destination: "/welcome",
+        permanent: true,
+      },
+    };
+  }
+
   return {
     props: {},
   };

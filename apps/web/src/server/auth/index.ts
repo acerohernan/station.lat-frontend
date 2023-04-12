@@ -24,6 +24,10 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         // eslint-disable-next-line no-param-reassign
         session.user.id = user.id;
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //  @ts-ignore
+        // eslint-disable-next-line no-param-reassign
+        session.user.welcomeFlowFinished = user.welcomeFlowFinished;
         // session.user.role = user.role; <-- put other properties on the session here
       }
 
